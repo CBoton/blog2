@@ -12,19 +12,20 @@ spec:
       labels:
         app: client
     spec:
-      containers: 
-      - name: client
-        image: docker.io/boton318/client
+      containers:
+        - name: client
+          image: docker.io/boton318/client
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: client-srv
 spec:
-  selector: 
+  type: NodePort
+  selector:
     app: client
-  ports: 
-    - name: client
+  ports:
+    - name: client-srv
       protocol: TCP
       port: 3000
       targetPort: 3000

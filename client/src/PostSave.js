@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const PostCreate = () => {
+const PostSave = () => {
   const [title, setTitle] = useState("");
 
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    await axios.post("/posts/create", {
+    await axios.post("http://posts.com/posts/save", {
       title,
     });
 
@@ -25,9 +25,9 @@ const PostCreate = () => {
             className="form-control"
           />
         </div>
-        <button className="btn btn-primary">Submit</button>
+        <button className="btn btn-primary">Save</button>
       </form>
     </div>
   );
 };
-export default PostCreate;
+export default PostSave;

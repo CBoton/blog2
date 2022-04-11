@@ -12,18 +12,18 @@ spec:
       labels:
         app: posts
     spec:
-      containers: 
-      - name: posts
-        image: docker.io/boton318/posts
+      containers:
+        - name: posts
+          image: docker.io/boton318/posts
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: posts-srv
 spec:
-  selector: 
+  selector:
     app: posts
-  ports: 
+  ports:
     - name: posts
       protocol: TCP
       port: 4000

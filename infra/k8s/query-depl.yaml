@@ -12,18 +12,18 @@ spec:
       labels:
         app: query
     spec:
-      containers: 
-      - name: query
-        image: docker.io/boton318/query
+      containers:
+        - name: query
+          image: docker.io/boton318/query
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: query-srv
 spec:
-  selector: 
+  selector:
     app: query
-  ports: 
+  ports:
     - name: query
       protocol: TCP
       port: 4002
