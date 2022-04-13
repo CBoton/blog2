@@ -47,7 +47,7 @@ app.post('/posts/save', async (req, res) => {
 
   res.status(200).send(`Successfully added post  ${title} with id ${id}`).end();
 });
-});
+
 
 
 

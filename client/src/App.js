@@ -1,7 +1,8 @@
 import React from 'react';
 import PostCreate from './PostCreate';
 import PostList from './PostList';
-import PostSave from './PostSave'
+import PostSave from './PostSave';
+
 
 const App = () => {
   return <div className="container">

@@ -17,13 +17,6 @@ spec:
                 name: posts-srv
                 port:
                   number: 4000
-          - path: /posts/save
-            pathType: Prefix
-            backend:
-              service:
-                name: save-srv
-                port:
-                  number: 4004
           - path: /posts
             pathType: Prefix
             backend:

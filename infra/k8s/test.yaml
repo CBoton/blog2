@@ -4,36 +4,44 @@ metadata:
   name: ingress
   annotations:
     kubernetes.io/ingress.class: 'gce'
-    kubernetes.io/ingress.global-static-ip-name: 'ingress-webapps'
+    kubernetes.io/ingress.global-static-ip-name: 'posts'
 spec:
   rules:
-    - http:
+    - host: posts.com
+      http:
         paths:
           - path: '/*'
             pathType: ImplementationSpecific
             backend:
               service:
-                name: client-srv
+                name: client-np-srv
                 port:
                   number: 3000
           - path: '/posts/create'
             pathType: ImplementationSpecific
             backend:
               service:
-                name: posts-srv
+                name: posts-np-srv
                 port:
                   number: 4000
           - path: '/posts/comments/*'
             pathType: ImplementationSpecific
             backend:
               service:
-                name: comments-srv
+                name: comments-np-srv
                 port:
                   number: 4001
           - path: '/posts'
             pathType: ImplementationSpecific
             backend:
               service:
-                name: query-srv
+                name: query-np-srv
                 port:
                   number: 4002
+          - path: '/posts/save'
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: save-np-srv
+                port:
+                  number: 4004
