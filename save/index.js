@@ -11,6 +11,10 @@ app.use(cors());
 
 const posts = {};
 
+app.get("/posts", (req, res) => {
+  res.send(posts);
+});
+
   // Establish a connection to the database
   let pool = mysql.createPool({
     user: process.env.DB_USER, // e.g. 'my-db-user'

@@ -1,0 +1,65 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: client-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - '*'
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: client-ingress
+spec:
+  hosts:
+    - '*'
+  gateways:
+    - client-gateway
+  http:
+    - match:
+        - uri:
+            regex: /posts/comments/.*.*
+      route:
+        - destination:
+            host: comments-srv # 2
+            port:
+              number: 4001
+    - match:
+        - uri:
+            regex: /posts/save
+      route:
+        - destination:
+            host: save-srv # 2
+            port:
+              number: 4004
+    - match:
+        - uri:
+            prefix: /posts/create
+      route:
+        - destination:
+            host: posts-srv # 2
+            port:
+              number: 4000
+    - match:
+        - uri:
+            prefix: /posts
+      route:
+        - destination:
+            host: query-srv # 2
+            port:
+              number: 4002
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: client-srv # 2
+            port:
+              number: 80

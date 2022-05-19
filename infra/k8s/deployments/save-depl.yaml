@@ -11,7 +11,7 @@ spec:
       labels:
         app: save
     spec:
-      serviceAccountName: cloud-sql-ksa
+      serviceAccountName: ksa-cloud-sql
       containers:
         - name: save
           # Replace <LOCATION> with your Artifact Registry location (e.g., us-central1).
@@ -19,10 +19,10 @@ spec:
           image: docker.io/boton318/save
           # This app listens on port 8080 for web traffic by default.
           ports:
-            - containerPort: 8080
+            - containerPort: 4004
           env:
             - name: PORT
-              value: '8080'
+              value: '4004'
             - name: DB_HOST
               value: '127.0.0.1'
             - name: DB_PORT
@@ -57,7 +57,7 @@ spec:
             # tcp should be set to the port the proxy should listen on
             # and should match the DB_PORT value set above.
             # Defaults: MySQL: 3306, Postgres: 5432, SQLServer: 1433
-            - '-instances=prime-imagery-346616:us-west1:saves=tcp:3306'
+            - '-instances=app-mod-gebu-trainees:us-west1:saves2=tcp:3306'
           securityContext:
             # The default Cloud SQL proxy image runs as the
             # "nonroot" user and group (uid: 65532) by default.
@@ -71,19 +71,7 @@ spec:
   selector:
     app: save
   ports:
-    - name: save
+    - name: http
       protocol: TCP
       port: 4004
-      targetPort: 4004
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: save-np-srv
-spec:
-  selector:
-    app: save
-  type: NodePort
-  ports:
-    - port: 4004
       targetPort: 4004
